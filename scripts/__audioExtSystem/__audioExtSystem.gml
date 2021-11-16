@@ -14,7 +14,3 @@ function __audioExtInit() {
 __audioExtInit();
 
 __audioExtTrace(AUDIO_EXT_VERSION + " initalized! Created by " + AUDIO_EXT_AUTHOR);
-
-function __audioExtTrace(_string) {
-	show_debug_message("AudioExt: " + _string);	
-}

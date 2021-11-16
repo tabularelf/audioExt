@@ -11,5 +11,7 @@ function audioExtWavRemove(_name) {
 		if (AUDIT_EXT_DEBUG_MODE) {
 			__audioExtTrace("Removed sound " + string(_name) + ".");	
 		}
+	} else {
+		__audioExtError("Sound \"" + _name + "\" doesn't exist!");
 	}
 }
