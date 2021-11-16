@@ -1,4 +1,4 @@
-# audioExt v0.0.1
+# audioExt v0.0.2
  Sound External Loader/Unloader Manager for GameMaker Studio 2.3.1+
  
  This library helps load/unload, assign and manage ogg/wav files into neat lil structs to quickly utilize.
