@@ -11,7 +11,7 @@ Instead, you should use `audioExtSoundExists()` and remove the ogg file with `au
 
 | Windows | MacOSX | Linux | iOS | Android | HTML5 | Opera GX | Xbox One UWP |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-|✔|✔|✔|✔|✔|❌|✔|✔
+|✔|✔|✔|✔|✔|❌|✔|✔⁉|
 
 ## Functions: 
 
