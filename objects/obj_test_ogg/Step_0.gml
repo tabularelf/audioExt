@@ -1,0 +1,5 @@
+if (point_in_rectangle(mouse_x, mouse_y, x-256,y-48,x+256,y+48)) {
+	if (mouse_check_button_pressed(mb_left)) {
+		audio_play_sound(audioExtSoundGetSoundID(audio.getName()), 1, false);	
+	}	
+}

@@ -2,13 +2,18 @@
 /// @param name
 
 function audioExtWavRemove(_name) {
-	if (variable_struct_exists(global.__audioExtSystem.soundMap, _name  + "WAV")) {
-		var _struct = global.__audioExtSystem.soundMap[$ _name  + "WAV"];
+	if (__AUDIO_EXT_WEB) {
+		__audioExtTrace("Web is not supported at this time.");
+		return -1;
+	}
+	
+	if (variable_struct_exists(global.__audioExtSystem.wavMap, _name)) {
+		var _struct = global.__audioExtSystem.wavMap[$ _name];
 		audio_free_buffer_sound(_struct.soundID);
 		buffer_delete(_struct.bufferID);
-		variable_struct_remove(global.__audioExtSystem.soundMap, _name  + "WAV");
+		variable_struct_remove(global.__audioExtSystem.wavMap, _name);
 		
-		if (AUDIT_EXT_DEBUG_MODE) {
+		if (AUDIO_EXT_DEBUG_MODE) {
 			__audioExtTrace("Removed sound " + string(_name) + ".");	
 		}
 	} else {

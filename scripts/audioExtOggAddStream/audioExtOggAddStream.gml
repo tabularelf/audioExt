@@ -3,6 +3,11 @@
 /// @param [name]
 
 function audioExtOggAddStream(_fileName, _nameID = undefined) {
+	if (__AUDIO_EXT_WEB) {
+		__audioExtTrace("Web is not supported at this time.");
+		return undefined;
+	}
+	
 	// Ensure that we've initalized first!
 	__audioExtInit();
 	
@@ -24,7 +29,7 @@ function audioExtOggAddStream(_fileName, _nameID = undefined) {
 	
 	var _audioStruct = new __audioExtOgg(_name, _fileName, _soundID);
 	
-	if (AUDIT_EXT_DEBUG_MODE) {
+	if (AUDIO_EXT_DEBUG_MODE) {
 		__audioExtTrace("Added stream " + _name + " with soundID " + string(_audioStruct.getSoundID()) + ".");		
 	}
 	
