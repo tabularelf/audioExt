@@ -7,7 +7,13 @@ Note: Only wavs currently support 3D audio. Ogg files are streamed in and do not
 Additionally: As of 2.3.6 (maybe earlier), `audio_exists()` does not correctly return true for ogg files, due to an internal bug with audio streams.
 Instead, you should use `audioExtSoundExists()` and remove the ogg file with `audioExtOggRemoveStream()` from the database.
 
-## Functions:
+## Supported Platforms:
+
+| Windows | MacOSX | Linux | iOS | Android | HTML5 | Opera GX | Xbox One UWP |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+|✔|✔|✔|✔|✔|❌|✔|✔
+
+## Functions: 
 
 ### `audioExtSoundExists(name)`
 
@@ -67,6 +73,26 @@ Returns: struct or `undefined`.
 
 Removes the wav file, if one exists. Throws an error if it doesn't.
 
+### `audioExtOggGetNames(name)`
+
+Gets the name of all of the ogg files loaded in.
+
+Returns: array
+
+### `audioExtWavGetNames(name)`
+
+Gets the name of all of the wav files loaded in.
+
+Returns: array
+
+### `audioExtOggScan(filePath)`
+
+Scans all of the files within the chosen filePath and loads in any ogg files.
+
+### `audioExtWavScan(filePath)`
+
+Scans all of the files within the chosen filePath and loads in any wav files.
+
 ## General Struct methods
 
 `.getSoundID()` - Returns the SoundID from the struct.
@@ -77,7 +103,7 @@ Removes the wav file, if one exists. Throws an error if it doesn't.
 
 `.getFileName()` - Returns the filename from the struct.
 
-`.getType()` - Returns the channel type from the struct. 
+`.getChannel()` - Returns the channel type from the struct. 
 
 ## Wav struct specific methods
 
