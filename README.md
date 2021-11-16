@@ -54,3 +54,19 @@ Optional Argument: `[is3D]` defaults to false. Determines if the audio file is i
 ### `audioExtWavRemove(name)`
 
 Removes the wav file, if one exists. Throws an error if it doesn't.
+
+## General Struct methods
+
+`.getSoundID()` - Returns the SoundID from the struct.
+
+`.getName()` - Returns the name from the struct.
+
+`.getFileType()` - Returns the filetype (wav/ogg) from the struct.
+
+`.getFileName()` - Returns the filename from the struct.
+
+`.getType()` - Returns the channel type from the struct. 
+
+## Wav struct specific methods
+
+`.getBuffer()` - Returns the bufferID from the struct.
