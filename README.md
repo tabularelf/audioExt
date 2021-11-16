@@ -13,19 +13,27 @@ Instead, you should use `audioExtSoundExists()` and remove the ogg file with `au
 
 Checks whether a valid ogg or wav struct exists with that name.
 
+Returns: true/false.
+
 ### `audioExtSoundGet(name)`
 
-Gets the sound struct from the list (or returns `undefined` if none exists).
+Gets the sound struct from the list.
+
+Returns: struct or `undefined`.
 
 ### `audioExtSoundGetSoundID(name)`
 
-Gets the soundID from the list (or returns `-1` if none exists).
+Gets the soundID from the list.
+
+Returns: soundID or `-1`.
 
 ### `audioExtOggAddStream(filename, [name])`
 
 Adds the ogg file as a streamable source. The audio **must** remain availabe at all times while it's currently in use.
 
 Optional Argument: `[name]` defaults to the name of the file (excluding the extension).
+
+Returns: struct or `undefined`.
 
 ### `audioExtOggRemoveStream(name)`
 
@@ -43,6 +51,8 @@ Optional Argument: `[is3D]` defaults to false. Determines if the audio file is i
 
 Optional Argument: `[filename]` defaults to `""`. 
 
+Returns: struct or `undefined`.
+
 ### `audioExtWavAddFile(filename, [name], [is3D])`
 
 Adds the wav file as a sound source from a filename. As this audio is loaded and handled in memory, you do not need to keep the file around afterwards.
@@ -50,6 +60,8 @@ Adds the wav file as a sound source from a filename. As this audio is loaded and
 Optional Argument: `[name]` defaults to the name of the file (excluding the extension).
 
 Optional Argument: `[is3D]` defaults to false. Determines if the audio file is intended for 3D Audio. Otherwise uses whatever the wav format determines. (Mono/Stereo)
+
+Returns: struct or `undefined`.
 
 ### `audioExtWavRemove(name)`
 
