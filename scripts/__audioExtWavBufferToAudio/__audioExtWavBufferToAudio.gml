@@ -19,9 +19,9 @@ function __audioExtWavBufferToAudio(_buff, _is3D = false) {
 			var _channel;
 			if (_is3D == false) {
 				switch(buffer_peek(_buff,22,buffer_u16)) {
-							case 1: _channel = audio_mono; break;    
-							case 2: _channel = audio_stereo; break;
-							default: _channel = -1; break;
+						case 1: _channel = audio_mono; break;    
+						case 2: _channel = audio_stereo; break;
+						default: _channel = -1; break;
 					}
 			} else {
 				_channel = audio_3d;	
