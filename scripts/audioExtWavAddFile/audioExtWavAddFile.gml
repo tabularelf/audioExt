@@ -26,7 +26,7 @@ function audioExtWavAddFile(_fileName, _is3D = false, _preload = true, _compress
 	}
 	
 	var _buff = -1;
-	if (_preload == false) {
+	if (_preload == false) || (_compressed == true) {
 		_buff = buffer_load(_fileName);
 		if (_buff == -1) {
 			__audioExtTrace("File \"" + _fileName + "\" failed to load!");
@@ -37,7 +37,7 @@ function audioExtWavAddFile(_fileName, _is3D = false, _preload = true, _compress
 		var _cbuff = buffer_compress(_buff);
 	}*/
 	
-	var _audioStruct = audioExtWavAddBuffer(_buff, _name, _is3D, _preload, _fileName);
+	var _audioStruct = audioExtWavAddBuffer(_buff, _name, _is3D, _preload, _compressed, _fileName);
 	if (buffer_exists(_buff)) {
 		buffer_delete(_buff);
 	}

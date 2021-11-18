@@ -3,9 +3,10 @@
 /// @param name
 /// @param [is3D]
 /// @param [preload]
+/// @param [compressed_in_memory]
 /// @param [filename]
 
-function audioExtWavAddBuffer(_buff, _name, _is3D = false, _preload = true, _fileName = "") {
+function audioExtWavAddBuffer(_buff, _name, _is3D = false, _preload = true, _compressed = false, _fileName = "") {
 	if (__AUDIO_EXT_WEB) {
 		__audioExtTrace("Web is not supported at this time.");
 		return undefined;
@@ -16,18 +17,24 @@ function audioExtWavAddBuffer(_buff, _name, _is3D = false, _preload = true, _fil
 	
 	var _newBuff = -1;
 	var _soundID = -1;
-	if (_preload == false) {
+	var _cbuff = -1;
+	if (_preload == false) || (_compressed == true) {
 		_newBuff = buffer_create(buffer_get_size(_buff), buffer_fixed, 1);
 		buffer_copy(_buff, 0, buffer_get_size(_buff), _newBuff, 0);
-		_soundID = __audioExtWavBufferToAudio(_newBuff, _is3D);
-		
-		if (_soundID == -1) {
+		if (_compressed == false) {
+			_soundID = __audioExtWavBufferToAudio(_newBuff, _is3D);
+			if (_soundID == -1) {
+				buffer_delete(_newBuff);
+				return undefined;
+			}
+		} else {
+			var _cbuff = buffer_compress(_newBuff, 0, buffer_get_size(_newBuff));
 			buffer_delete(_newBuff);
-			return undefined;
+			_newBuff = -1;
 		}
 	} 
 	
-	var _audioStruct = new __audioExtWave(_name, _newBuff, _soundID, _fileName, _is3D, _preload);
+	var _audioStruct = new __audioExtWave(_name, _newBuff, _soundID, _fileName, _is3D, _preload, _compressed, _cbuff);
 	
 	if (AUDIO_EXT_DEBUG_MODE) {
 		__audioExtTrace("Added sound buffer " + _name + " with soundID " + string(_audioStruct.getSoundID()) + ".");			
