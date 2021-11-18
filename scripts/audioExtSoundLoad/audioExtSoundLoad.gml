@@ -1,4 +1,4 @@
-function audioExtSoundUnload(_name) {
+function audioExtSoundLoad(_name) {
     if (variable_struct_exists(global.__audioExtSystem.oggMap, _name)) {
         var _audioStruct = global.__audioExtSystem.oggMap[$ _name];
         _audioStruct.load();
