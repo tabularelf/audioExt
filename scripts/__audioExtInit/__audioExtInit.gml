@@ -15,7 +15,9 @@ function __audioExtInit() {
 		global.__audioExtSystem = {
 			wavMap: {},
 			oggMap: {},
-			audioUnloadList: ds_list_create()
+			audioUnloadList: ds_list_create(),
+			oggList: ds_list_create(),
+			wavList: ds_list_create()
 		}
 		
 		if (AUDIO_EXT_SCAN_ON_START) {

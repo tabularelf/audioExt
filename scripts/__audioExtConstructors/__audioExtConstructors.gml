@@ -1,12 +1,12 @@
 enum audioExtStatus {
 		LOADING,
 		LOADED,
-		UNLOADED,
-		ERROR
+		ERROR,
+		REMOVED
 }
 
 function __audioExtPar(_soundID) constructor {
-	status = audioExtStatus.LOADING;
+	__status = audioExtStatus.LOADING;
 	loaded = false;
 	
 	static isLoaded = function() {
@@ -21,21 +21,40 @@ function __audioExtPar(_soundID) constructor {
 		return fileType;
 	}	
 	
-	static getFileName = function() {
-			return fileName;
+	static getfilePath = function() {
+			return filePath;
+	}
+	
+	static getSoundID = function() {
+		if (isLoaded() == false) {
+			load();
+			return soundID;
+		} else {
+			return soundID;
+		}
+	}
+	
+	static getStatus = function() {
+		return __status;
 	}
 }
 
-function __audioExtOgg(_name, _fileName, _soundID, _preload) : __audioExtPar(_soundID) constructor {
+function __audioExtOgg(_name, _filePath, _soundID, _preload) : __audioExtPar(_soundID) constructor {
 	soundID = _soundID;
 	name = _name;
-	fileName = _fileName;
+	filePath = _filePath;
 	fileType = "OGG";
 	loaded = !_preload;
+	__status = audioExtStatus.LOADED;
 	
 	global.__audioExtSystem.oggMap[$ _name] = self;
+	ds_list_add(global.__audioExtSystem.oggList, self);
 	
 	static unload = function(_force = false) {
+		if !(isLoaded()) exit;
+		if (__status == audioExtStatus.REMOVED) {
+			__audioExtError("Audio struct was removed from memory!");	
+		}
 		if !(audio_is_playing(soundID)) || (_force == true) {
 			if (isLoaded()) {
 				audio_stop_sound(soundID);
@@ -56,46 +75,62 @@ function __audioExtOgg(_name, _fileName, _soundID, _preload) : __audioExtPar(_so
 	}
 	
 	static load = function() {
-		if !(file_exists(fileName)) {
-			__audioExtError("Filename " + fileName + " doesn't exist!");
+		if (isLoaded()) exit;
+		if (__status == audioExtStatus.REMOVED) {
+			__audioExtError("Audio struct was removed from memory!");	
+		}
+		
+		if !(file_exists(filePath)) {
+			__audioExtError("filePath " + filePath + " doesn't exist!");
 			return;
 		} 
-		var _soundID = audio_create_stream(fileName);
+		var _soundID = audio_create_stream(filePath);
 		if (_soundID != -1) {
 			soundID = _soundID;
 			loaded = true;
 		}
 	}
 	
-	static getSoundID = function() {
-		if (isLoaded() == false) {
-			load();
-			return soundID;
-		} else {
-			return soundID;
+	static remove = function() {
+		if (soundID != -1) {
+			audio_stop_sound(soundID);
+			audio_destroy_stream(soundID);
+			soundID = -1;
 		}
+		
+		name = "";
+		filePath = "";
+		
+		__status = audioExtStatus.REMOVED;
+		variable_struct_remove(global.__audioExtSystem.oggMap, name);
 	}
 }
 
-function __audioExtWave(_name, _buff, _soundID, _fileName = "", _is3D, _preload, _compressed = false, _cbuff = -1) : __audioExtPar(_soundID) constructor {
+function __audioExtWave(_name, _buff, _soundID, _filePath = "", _is3D, _preload, _compressed = false, _cbuff = -1) : __audioExtPar(_soundID) constructor {
 	bufferID = _buff;
 	soundID = _soundID;
 	fileType = "WAV";
-	fileName = _fileName;
+	filePath = _filePath;
 	name = _name;
 	compressed = _compressed;
 	compressedBufferID = _cbuff;
 	audioIs3D = _is3D;
 	loaded = !_preload;
 	asyncLoad = false;
+	__status = audioExtStatus.LOADED;
 	
 	global.__audioExtSystem.wavMap[$ _name] = self;
+	ds_list_add(global.__audioExtSystem.wavList, self);
 	
 	static getBuffer = function() {
 		return bufferID;	
 	}
 	
 	static unload = function(_force = false) {
+		if !(isLoaded()) exit;
+		if (__status == audioExtStatus.REMOVED) {
+			__audioExtError("Audio struct was removed from memory!");	
+		}
 		if !(audio_is_playing(soundID)) || (_force == true) {
 			if (isLoaded()) {
 				audio_stop_sound(soundID);
@@ -129,8 +164,12 @@ function __audioExtWave(_name, _buff, _soundID, _fileName = "", _is3D, _preload,
 	
 	static load = function() {
 		if (isLoaded()) exit;
-		if !(file_exists(fileName)) && (compressed == false) {
-				__audioExtError("Filename " + fileName + " doesn't exist!");
+		if (__status == audioExtStatus.REMOVED) {
+			__audioExtError("Audio struct was removed from memory!");	
+		}
+		
+		if !(file_exists(filePath)) && (compressed == false) {
+				__audioExtError("filePath " + filePath + " doesn't exist!");
 				return;
 			} 
 			
@@ -151,7 +190,7 @@ function __audioExtWave(_name, _buff, _soundID, _fileName = "", _is3D, _preload,
 					buffer_delete(_buff);
 				}
 			} else {
-				var _buff = buffer_load(fileName);
+				var _buff = buffer_load(filePath);
 				var _size = buffer_get_size(_buff);
 				var _newBuff = buffer_create(_size, buffer_fixed, 1);
 				buffer_copy(_buff, 0, _size, _newBuff, 0);
@@ -167,13 +206,28 @@ function __audioExtWave(_name, _buff, _soundID, _fileName = "", _is3D, _preload,
 				buffer_delete(_buff);
 			}
 		}
-	
-	static getSoundID = function() {
-		if (isLoaded() == false) {
-			load();
-			return soundID;
-		} else {
-			return soundID;
+		
+	static remove = function() {
+		if (soundID != -1) {
+			audio_stop_sound(soundID);
+			audio_free_buffer_sound(soundID);
+			soundID = -1;
 		}
+		
+		if (bufferID != -1) {
+			buffer_delete(bufferID);
+			bufferID = -1;
+		}
+		
+		if (compressedBufferID != -1) {
+			buffer_delete(compressedBufferID);
+			compressedBufferID = -1;
+		}
+		
+		name = "";
+		filePath = "";
+		
+		__status = audioExtStatus.REMOVED;
+		variable_struct_remove(global.__audioExtSystem.wavMap, name);
 	}
 }
