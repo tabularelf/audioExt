@@ -9,7 +9,9 @@ function audioExtOggRemoveStream(_name) {
 	
 	if (variable_struct_exists(global.__audioExtSystem.oggMap, _name)) {
 		var _struct = global.__audioExtSystem.oggMap[$ _name];
-		audio_destroy_stream(_struct.soundID);
+		if (_struct.soundID != -1) {
+			audio_destroy_stream(_struct.soundID);
+		}
 		variable_struct_remove(global.__audioExtSystem.oggMap, _name);
 		
 		if (AUDIO_EXT_DEBUG_MODE) {
