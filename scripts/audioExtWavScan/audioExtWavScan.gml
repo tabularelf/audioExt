@@ -2,6 +2,7 @@
 /// @param filePath
 /// @param [preload]
 /// @param [compressed_in_memory]
+
 function audioExtWavScan(_filepath, _preload = true, _compressed = false) {
 		if (__AUDIO_EXT_WEB) {
 			__audioExtTrace("Web is not supported at this time.");

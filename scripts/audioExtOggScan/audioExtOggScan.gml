@@ -1,5 +1,7 @@
 /// @func audioExtOggScan
 /// @param filePath
+/// @param [preload]
+
 function audioExtOggScan(_filepath, _preload = true) {
 		if (__AUDIO_EXT_WEB) {
 			__audioExtTrace("Web is not supported at this time.");

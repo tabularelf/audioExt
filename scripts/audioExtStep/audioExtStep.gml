@@ -1,4 +1,12 @@
 function audioExtStep() {  
+	if (__AUDIO_EXT_WEB) {
+		__audioExtTrace("Web is not supported at this time.");
+		return -1;
+	}
+	
+	// Ensure that we've initalized first!
+	__audioExtInit();
+	
     var _i = 0;
     var _unloadList = global.__audioExtSystem.audioUnloadList; 
     repeat(ds_list_size(_unloadList)) {
