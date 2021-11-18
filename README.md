@@ -13,7 +13,7 @@ Note: signed 16-bit and signed 8-bit are only supported for wav files.
 
 | Windows | MacOSX | Linux | iOS | Android | HTML5 | Opera GX | Xbox One UWP |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-|✔|✔|✔|✔|✔|❌|✔|✔⁉|
+|✔|✔|✔|✔|✔|❌|✔|✔|
 
 ## Functions: 
 
