@@ -53,7 +53,7 @@ Optional Argument: `[name]` defaults to the name of the file (excluding the exte
 
 Adds the wav file as a sound source from a buffer. The buffer itself is copied. 
 
-Optional Argument: `[name]` defaults to the name of the file (excluding the extension).
+`name` is the name that you want audioExt to recongize it as.
 
 Optional Argument: `[is3D]` defaults to false. Determines if the audio file is intended for 3D Audio. Otherwise uses whatever the wav format determines. (Mono/Stereo)
 
@@ -65,7 +65,7 @@ Returns: struct or `undefined`.
 
 Adds the wav file as a sound source from a filename. As this audio is loaded and handled in memory, you do not need to keep the file around afterwards.
 
-Optional Argument:`[name]` defaults to the filename.
+Optional Argument: `[name]` defaults to the name of the file (excluding the extension).
 
 Optional Argument: `[is3D]` defaults to false. Determines if the audio file is intended for 3D Audio. Otherwise uses whatever the wav format determines. (Mono/Stereo)
 
