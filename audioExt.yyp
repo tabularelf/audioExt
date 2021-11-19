@@ -20,6 +20,7 @@
     {"id":{"name":"audioExtOggRemoveStream","path":"scripts/audioExtOggRemoveStream/audioExtOggRemoveStream.yy",},"order":1,},
     {"id":{"name":"audioExtSoundGetSoundID","path":"scripts/audioExtSoundGetSoundID/audioExtSoundGetSoundID.yy",},"order":6,},
     {"id":{"name":"audioExtWavRemove","path":"scripts/audioExtWavRemove/audioExtWavRemove.yy",},"order":1,},
+    {"id":{"name":"audioExtSoundRemove","path":"scripts/audioExtSoundRemove/audioExtSoundRemove.yy",},"order":9,},
     {"id":{"name":"__audioExtInit","path":"scripts/__audioExtInit/__audioExtInit.yy",},"order":1,},
     {"id":{"name":"audioExtWavGetNames","path":"scripts/audioExtWavGetNames/audioExtWavGetNames.yy",},"order":4,},
     {"id":{"name":"audioExtSoundExists","path":"scripts/audioExtSoundExists/audioExtSoundExists.yy",},"order":2,},

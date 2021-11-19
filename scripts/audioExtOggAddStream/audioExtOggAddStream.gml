@@ -3,7 +3,7 @@
 /// @param [preload]
 /// @param [alias]
 
-function audioExtOggAddStream(_filePath, _preload = true, _nameID = undefined) {
+function audioExtOggAddStream(_filePath, _preload = false, _nameID = undefined) {
 	if (__AUDIO_EXT_WEB) {
 		__audioExtTrace("Web is not supported at this time.");
 		return undefined;
@@ -23,7 +23,7 @@ function audioExtOggAddStream(_filePath, _preload = true, _nameID = undefined) {
 	}
 	
 	var _soundID = -1;
-	if (_preload == false) {
+	if (_preload == true) {
 		_soundID = audio_create_stream(_filePath);
 		if (_soundID == -1) {
 			__audioExtTrace("File \"" + _filePath + "\" failed to load!");

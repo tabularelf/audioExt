@@ -44,7 +44,7 @@ function __audioExtOgg(_name, _filePath, _soundID, _preload) : __audioExtPar(_so
 	name = _name;
 	filePath = _filePath;
 	fileType = "OGG";
-	loaded = !_preload;
+	loaded = _preload;
 	__status = audioExtStatus.LOADED;
 	
 	global.__audioExtSystem.oggMap[$ _name] = self;
@@ -115,7 +115,7 @@ function __audioExtWave(_name, _buff, _soundID, _filePath = "", _is3D, _preload,
 	compressed = _compressed;
 	compressedBufferID = _cbuff;
 	audioIs3D = _is3D;
-	loaded = !_preload;
+	loaded = _preload;
 	asyncLoad = false;
 	__status = audioExtStatus.LOADED;
 	
@@ -131,6 +131,7 @@ function __audioExtWave(_name, _buff, _soundID, _filePath = "", _is3D, _preload,
 		if (__status == audioExtStatus.REMOVED) {
 			__audioExtError("Audio struct was removed from memory!");	
 		}
+		
 		if !(audio_is_playing(soundID)) || (_force == true) {
 			if (isLoaded()) {
 				audio_stop_sound(soundID);
@@ -152,13 +153,23 @@ function __audioExtWave(_name, _buff, _soundID, _filePath = "", _is3D, _preload,
 		} else {
 			// We can't unload it so... Let's just wait.
 			var _i = 0;
+			var _foundSelf = false;
 			repeat(ds_list_size(global.__audioExtSystem.audioUnloadList)) {
 				if (global.__audioExtSystem.audioUnloadList[| _i++] == self) {
-					exit;	
+					_foundSelf = true;
+					if (AUDIO_EXT_DEBUG_MODE) {
+						__audioExtTrace("Found " + name + " in unload list!");
+					}
+					break;	
 				}
 			}
 			
-			ds_list_add(global.__audioExtSystem.audioUnloadList, self);
+			if !(_foundSelf) {
+				if (AUDIO_EXT_DEBUG_MODE) {
+					__audioExtTrace("Adding " + name + " to unload list!");
+				}
+				ds_list_add(global.__audioExtSystem.audioUnloadList, self);
+			}
 		}
 	}
 	
