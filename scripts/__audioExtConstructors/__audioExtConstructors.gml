@@ -21,7 +21,7 @@ function __audioExtPar(_soundID) constructor {
 		return fileType;
 	}	
 	
-	static getfilePath = function() {
+	static getFilePath = function() {
 			return filePath;
 	}
 	

@@ -1,4 +1,4 @@
-/// @func audioExtWavAddBuffer
+/// @func audioExtWavAddBuffer(buffer, alias, [is3D], [preload], [compressedInMemory], [filePath])
 /// @param buffer
 /// @param alias
 /// @param [is3D]
