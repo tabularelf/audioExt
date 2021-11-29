@@ -22,6 +22,7 @@ function audioExtStep() {
         ++_i;
     }
     
+	/*
     var _i = 0;
     var _list = global.__audioExtSystem.oggList; 
     repeat(ds_list_size(_list)) {
@@ -45,6 +46,7 @@ function audioExtStep() {
         } 
         ++_i;
     }
+	*/
 	
 	var _i = 0;
     var _list = global.__audioExtSystem.audioLoadList; 
@@ -52,6 +54,7 @@ function audioExtStep() {
 		var _entry = _list[| _i];
 		if !(_entry.isLoaded()) && (_entry.getStatus() == audioExtStatus.REMOVED) {
 			ds_list_delete(_list, _i);	
+			 --_i;
 		}
 		++_i;
 	}

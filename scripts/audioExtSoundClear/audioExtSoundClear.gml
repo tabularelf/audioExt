@@ -13,12 +13,10 @@ function audioExtSoundClear() {
 	var _i = 0;
 	repeat(ds_list_size(_oggList)) {
 		_oggList[| 0].remove();
-		ds_list_delete(_oggList, 0);
 	}
 	
 	repeat(ds_list_size(_wavList)) {
 		_wavList[| 0].remove();
-		ds_list_delete(_wavList, 0);
 	}
 	
 	ds_list_clear(global.__audioExtSystem.audioUnloadList);

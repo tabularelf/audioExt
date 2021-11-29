@@ -120,6 +120,8 @@ function __audioExtOgg(_name, _filePath, _soundID, _preload) : __audioExtPar(_so
 		
 		__status = audioExtStatus.REMOVED;
 		variable_struct_remove(global.__audioExtSystem.oggMap, name);
+		var _list = global.__audioExtSystem.oggList;
+		ds_list_delete(_list,ds_list_find_index(_list, self));
 	}
 }
 
@@ -263,5 +265,7 @@ function __audioExtWave(_name, _buff, _soundID, _filePath = "", _is3D, _preload,
 		
 		__status = audioExtStatus.REMOVED;
 		variable_struct_remove(global.__audioExtSystem.wavMap, name);
+		var _list = global.__audioExtSystem.wavList;
+		ds_list_delete(_list,ds_list_find_index(_list, self));
 	}
 }
