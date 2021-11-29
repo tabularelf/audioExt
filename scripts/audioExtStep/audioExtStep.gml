@@ -21,32 +21,6 @@ function audioExtStep() {
         }
         ++_i;
     }
-    
-	/*
-    var _i = 0;
-    var _list = global.__audioExtSystem.oggList; 
-    repeat(ds_list_size(_list)) {
-        var _entry = _list[| _i];
-        if (_entry.getStatus() == audioExtStatus.REMOVED) {
-            _entry.unload();
-            ds_list_delete(_list, _i);
-            --_i;
-        } 
-        ++_i;
-    }
-    
-    var _i = 0;
-    var _list = global.__audioExtSystem.wavList; 
-    repeat(ds_list_size(_list)) {
-        var _entry = _list[| _i];
-        if (_entry.getStatus() == audioExtStatus.REMOVED) {
-            _entry.unload();
-            ds_list_delete(_list, _i);
-            --_i;
-        } 
-        ++_i;
-    }
-	*/
 	
 	var _i = 0;
     var _list = global.__audioExtSystem.audioLoadList; 
