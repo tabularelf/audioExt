@@ -31,9 +31,9 @@ Returns: struct or `undefined`.
 
 ### `audioExtSoundGetSoundID(name/audioStruct)`
 
-Gets the soundID from the list.
+Gets the soundID from the list. If unloaded, will load in the sound first before passing the soundID.
 
-Returns: soundID or `-1`.
+Returns: soundID.
 
 ### `audioExtSoundLoad(name/audioStruct, ...)`
 
@@ -139,7 +139,7 @@ Scans all of the files within the chosen filePath and loads in any wav files.
 
 ## General Struct methods
 
-`.getSoundID()` - Returns the SoundID from the struct.
+`.getSoundID()` - Returns the SoundID from the struct. If unloaded, will load in the sound first before passing the soundID.
 
 `.getName()` - Returns the name from the struct.
 
