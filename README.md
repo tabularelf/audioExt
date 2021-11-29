@@ -91,7 +91,7 @@ Adds the wav file as a sound source from a buffer. The buffer itself is copied.
 
 Optional Argument: `[is3D]` defaults to false. Determines if the audio file is intended for 3D Audio. Otherwise uses whatever the wav format determines. (Mono/Stereo)
 
-Optional Argument: `[preload]` defaults to true. Adds an entry but doesn't actually load in the file.
+Optional Argument: `[preload]` defaults to false. Adds an entry but doesn't actually load in the file.
 
 Optional Argument: `[compressedInMemory]` defaults to false. Compresses data in memory automatically. Note: If `[preload]` is set to true, it will copy the buffer, but quickly compresses down in memory. Making it "unloaded".
 
@@ -105,7 +105,7 @@ Adds the wav file as a sound source from a filename. As this audio is loaded and
 
 Optional Argument: `[is3D]` defaults to false. Determines if the audio file is intended for 3D Audio. Otherwise uses whatever the wav format determines. (Mono/Stereo)
 
-Optional Argument: `[preload]` defaults to true. Adds an entry but doesn't actually load in the file.
+Optional Argument: `[preload]` defaults to false. Adds an entry but doesn't actually load in the file.
 
 Optional Argument: `[compressedInMemory]` defaults to false. Compresses data in memory automatically. Note: If `[preload]` is set to true, it will load in the file, but quickly compresses down in memory. Making it "unloaded".
 
@@ -129,13 +129,19 @@ Gets the name of all of the wav files loaded in.
 
 Returns: array
 
-### `audioExtOggScan(filePath)`
+### `audioExtOggScan(filePath, [preload])`
 
 Scans all of the files within the chosen filePath and loads in any ogg files.
 
-### `audioExtWavScan(filePath)`
+Optional Argument: `[preload]` defaults to false. Adds an entry but doesn't actually load in the file.
+
+### `audioExtWavScan(filePath, [preload], [compressedInMemory])`
 
 Scans all of the files within the chosen filePath and loads in any wav files.
+
+Optional Argument: `[preload]` defaults to false. Adds an entry but doesn't actually load in the file.
+
+Optional Argument: `[compressedInMemory]` defaults to false. Compresses data in memory automatically. Note: If `[preload]` is set to true, it will copy the buffer, but quickly compresses down in memory. Making it "unloaded".
 
 ## General Struct methods
 
