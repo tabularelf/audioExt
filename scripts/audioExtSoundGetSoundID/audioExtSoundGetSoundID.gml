@@ -21,6 +21,4 @@ function audioExtSoundGetSoundID(_name) {
 	} else {
 		__audioExtError("Sound \"" + _name + "\" doesn't exist!");
 	}
-	
-	return -1;
 }
