@@ -17,7 +17,8 @@ function __audioExtInit() {
 			oggMap: {},
 			audioUnloadList: ds_list_create(),
 			oggList: ds_list_create(),
-			wavList: ds_list_create()
+			wavList: ds_list_create(),
+			audioLoadList: ds_list_create()
 		}
 		
 		if (AUDIO_EXT_SCAN_ON_START) {

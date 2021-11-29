@@ -47,6 +47,10 @@ function __audioExtOgg(_name, _filePath, _soundID, _preload) : __audioExtPar(_so
 	loaded = _preload;
 	__status = audioExtStatus.LOADED;
 	
+	if (loaded) {
+		ds_list_add(global.__audioExtSystem.audioLoadList, self);	
+	}
+	
 	global.__audioExtSystem.oggMap[$ _name] = self;
 	ds_list_add(global.__audioExtSystem.oggList, self);
 	
@@ -64,13 +68,25 @@ function __audioExtOgg(_name, _filePath, _soundID, _preload) : __audioExtPar(_so
 		} else {
 			// We can't unload it so... Let's just wait.
 			var _i = 0;
+			var _foundSelf = false;
 			repeat(ds_list_size(global.__audioExtSystem.audioUnloadList)) {
 				if (global.__audioExtSystem.audioUnloadList[| _i++] == self) {
-					exit;	
+					// We can't have that in there!
+					_foundSelf = true;
+					if (AUDIO_EXT_DEBUG_MODE) {
+						__audioExtTrace("Found " + name + " in unload list!");
+					}
+					break;	
 				}
 			}
 			
-			ds_list_add(global.__audioExtSystem.audioUnloadList, self);
+			
+			if !(_foundSelf) {
+				if (AUDIO_EXT_DEBUG_MODE) {
+					__audioExtTrace("Adding " + name + " to unload list!");
+				}
+				ds_list_add(global.__audioExtSystem.audioUnloadList, self);
+			}
 		}
 	}
 	
@@ -88,6 +104,7 @@ function __audioExtOgg(_name, _filePath, _soundID, _preload) : __audioExtPar(_so
 		if (_soundID != -1) {
 			soundID = _soundID;
 			loaded = true;
+			ds_list_add(global.__audioExtSystem.audioLoadList, self);
 		}
 	}
 	
@@ -118,6 +135,10 @@ function __audioExtWave(_name, _buff, _soundID, _filePath = "", _is3D, _preload,
 	loaded = _preload;
 	asyncLoad = false;
 	__status = audioExtStatus.LOADED;
+	
+	if (loaded) {
+		ds_list_add(global.__audioExtSystem.audioLoadList, self);	
+	}
 	
 	global.__audioExtSystem.wavMap[$ _name] = self;
 	ds_list_add(global.__audioExtSystem.wavList, self);
@@ -197,6 +218,7 @@ function __audioExtWave(_name, _buff, _soundID, _filePath = "", _is3D, _preload,
 					soundID = _soundID;
 					bufferID = _buff;
 					loaded = true;
+					ds_list_add(global.__audioExtSystem.audioLoadList, self);
 				} else {
 					buffer_delete(_buff);
 				}
@@ -210,6 +232,7 @@ function __audioExtWave(_name, _buff, _soundID, _filePath = "", _is3D, _preload,
 					soundID = _soundID;
 					bufferID = _newBuff;
 					loaded = true;
+					ds_list_add(global.__audioExtSystem.audioLoadList, self);
 				} else {
 					buffer_delete(_newBuff);
 				}

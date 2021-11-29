@@ -6,7 +6,7 @@
     "path": "folders/audioExt/Ogg.yy",
   },
   "resourceVersion": "1.0",
-  "name": "audioExtOggRemoveStream",
+  "name": "audioExtOggRemove",
   "tags": [],
   "resourceType": "GMScript",
 }

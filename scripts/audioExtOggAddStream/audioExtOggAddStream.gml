@@ -25,6 +25,7 @@ function audioExtOggAddStream(_filePath, _preload = false, _nameID = undefined) 
 	var _soundID = -1;
 	if (_preload == true) {
 		_soundID = audio_create_stream(_filePath);
+		
 		if (_soundID == -1) {
 			__audioExtTrace("File \"" + _filePath + "\" failed to load!");
 			return undefined;

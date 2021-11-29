@@ -1,7 +1,7 @@
 /// @func audioExtOggRemove
 /// @param name
 
-function audioExtOggRemoveStream(_name) {
+function audioExtOggRemove(_name) {
 	if (__AUDIO_EXT_WEB) {
 		__audioExtTrace("Web is not supported at this time.");
 		return -1;
