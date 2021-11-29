@@ -4,7 +4,7 @@
 function audioExtSoundExists(_name) {
 	if (__AUDIO_EXT_WEB) {
 		__audioExtTrace("Web is not supported at this time.");
-		return -1;
+		return;
 	}
 	
 	// Ensure that we've initalized first!

@@ -9,9 +9,7 @@ function audioExtWavRemove(_name) {
 	
 	if (variable_struct_exists(global.__audioExtSystem.wavMap, _name)) {
 		var _struct = global.__audioExtSystem.wavMap[$ _name];
-		audio_free_buffer_sound(_struct.soundID);
-		buffer_delete(_struct.bufferID);
-		variable_struct_remove(global.__audioExtSystem.wavMap, _name);
+		_struct.remove();
 		
 		if (AUDIO_EXT_DEBUG_MODE) {
 			__audioExtTrace("Removed sound " + string(_name) + ".");	

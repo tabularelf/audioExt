@@ -1,4 +1,4 @@
-# audioExt v0.0.2
+# audioExt v0.0.3
  Sound External Loader/Unloader Manager for GameMaker Studio 2.3.1+
  
  This library helps load/unload, assign and manage ogg/wav files into neat lil structs to quickly utilize.
@@ -29,15 +29,49 @@ Gets the sound struct from the list.
 
 Returns: struct or `undefined`.
 
-### `audioExtSoundGetSoundID(name)`
+### `audioExtSoundGetSoundID(name/audioStruct)`
 
 Gets the soundID from the list.
 
 Returns: soundID or `-1`.
 
-### `audioExtOggAddStream(filename, [name])`
+### `audioExtSoundLoad(name/audioStruct, ...)`
+
+Loads in the audioStruct. Multiple arguments can be provided for each sequential audio.
+
+### `audioExtSoundUnload(name/audioStruct, [forced])`
+
+Unloads the audio. 
+
+Optional Argument: `[forced]` is default to false. On true, it will automatically unload the audio. Otherwise, it'll wait until the audio is done playing.
+
+### `audioExtSoundUnloadAll([forced])`
+
+Unloads all currently loaded audio. 
+
+Optional Argument: `[forced]` is default to false. On true, it will automatically unload the audio. Otherwise, it'll wait until the audio is done playing.
+
+### `audioExtSoundRemove(name/audioStruct, ...)` 
+
+Removes the audioStruct from the database. Multiple arguments will remove multiple entries.
+
+### `audioExtSoundIsLoaded(name/audioStruct)`
+
+Returns whether the audio is loaded in or not.
+
+### `audioExtSoundClear()`
+
+Unloads all audio entries from memory. 
+
+### `audioExtStep()`
+
+A necessary function to include in the step event of your project.
+
+### `audioExtOggAddStream(filename, [preload] [name])`
 
 Adds the ogg file as a streamable source. The audio **must** remain availabe at all times while it's currently in use.
+
+Optional Argument: `[preload]` defaults to true. Adds an entry but doesn't actually load in the file.
 
 Optional Argument: `[name]` defaults to the name of the file (excluding the extension).
 
@@ -57,17 +91,25 @@ Adds the wav file as a sound source from a buffer. The buffer itself is copied.
 
 Optional Argument: `[is3D]` defaults to false. Determines if the audio file is intended for 3D Audio. Otherwise uses whatever the wav format determines. (Mono/Stereo)
 
+Optional Argument: `[preload]` defaults to true. Adds an entry but doesn't actually load in the file.
+
+Optional Argument: `[compressedInMemory]` defaults to false. Compresses data in memory automatically. Note: If `[preload]` is set to true, it will copy the buffer, but quickly compresses down in memory. Making it "unloaded".
+
 Optional Argument: `[filename]` defaults to `""`. 
 
 Returns: struct or `undefined`.
 
-### `audioExtWavAddFile(filename, [name], [is3D])`
+### `audioExtWavAddFile(filename, [is3D], [compressedInMemory], [name])`
 
 Adds the wav file as a sound source from a filename. As this audio is loaded and handled in memory, you do not need to keep the file around afterwards.
 
-Optional Argument: `[name]` defaults to the name of the file (excluding the extension).
-
 Optional Argument: `[is3D]` defaults to false. Determines if the audio file is intended for 3D Audio. Otherwise uses whatever the wav format determines. (Mono/Stereo)
+
+Optional Argument: `[preload]` defaults to true. Adds an entry but doesn't actually load in the file.
+
+Optional Argument: `[compressedInMemory]` defaults to false. Compresses data in memory automatically. Note: If `[preload]` is set to true, it will load in the file, but quickly compresses down in memory. Making it "unloaded".
+
+Optional Argument: `[name]` defaults to the name of the file (excluding the extension).
 
 Returns: struct or `undefined`.
 
@@ -106,6 +148,10 @@ Scans all of the files within the chosen filePath and loads in any wav files.
 `.getFileName()` - Returns the filename from the struct.
 
 `.getChannel()` - Returns the channel type from the struct. 
+
+`.load()` - Loads in the audio.
+
+`.unload([forced])` - Unloads the audio. If forced is set to true, it will automatically unload the audio. Otherwise, it'll wait until the audio is done playing.
 
 ## Wav struct specific methods
 

@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "System",
-    "path": "folders/audioExt/System.yy",
+    "name": "Ogg",
+    "path": "folders/audioExt/Ogg.yy",
   },
   "resourceVersion": "1.0",
-  "name": "__audioExtGetNameFromFileName",
+  "name": "audioExtOggRemove",
   "tags": [],
   "resourceType": "GMScript",
 }
