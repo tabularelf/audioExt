@@ -7,7 +7,7 @@ Note: Only wavs currently support 3D audio. Ogg files are streamed in and do not
 Additionally: As of 2.3.6 (maybe earlier), `audio_exists()` does not correctly return true for ogg files, due to an internal bug with audio streams.
 Instead, you should use `audioExtSoundExists()` and remove the ogg file with `audioExtOggRemoveStream()` from the database.
 
-Note: signed 16-bit and signed 8-bit are only supported for wav files.
+Note: signed 16-bit and unsigned 8-bit are only supported for wav files.
 
 ## Supported Platforms:
 
