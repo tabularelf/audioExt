@@ -3,7 +3,7 @@
  
  This library helps load/unload, assign and manage ogg/wav files into neat lil structs to quickly utilize.
 
-Note: Only wavs currently support 3D audio. Ogg files are streamed in and do not have an option for 3D audio support.
+Note: ~~Only wavs currently support 3D audio. Ogg files are streamed in and do not have an option for 3D audio support support 3D audio out of the box~~ Both wav and ogg files support 3D Audio.
 Additionally: As of 2.3.6 (maybe earlier), `audio_exists()` does not correctly return true for ogg files, due to an internal bug with audio streams.
 Instead, you should use `audioExtSoundExists()` and remove the ogg file with `audioExtOggRemoveStream()` from the database.
 
