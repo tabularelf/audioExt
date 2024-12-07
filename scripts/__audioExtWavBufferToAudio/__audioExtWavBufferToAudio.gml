@@ -1,5 +1,5 @@
 function __audioExtWavBufferToAudio(_buff, _is3D = false) {
-	var _header = 42;
+	var _header = 44;
 	
 	// Set Seek
 	buffer_seek(_buff,buffer_seek_start,0);
